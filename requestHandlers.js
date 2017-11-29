@@ -27,7 +27,7 @@ function post(response, postData){
     });
   });
     response.writeHead(200, {"Content-Type": "text/plain"});
-    response.write("You've sent the text: "+querystring.parse(postData).text);
+    response.write(post_theme+" "+post_text);
     response.end();
   }
   else
@@ -51,7 +51,7 @@ function get(response, postData){
 
   var datas = querystring.parse(postData);
 
-  if(postData=="all" || postData==""){
+  if(postData=="all" || postData=="" ||postData==null){
     table_post.findAll().then(posts => {
       response.writeHead(200, {"Content-Type": "text/plain"});
       //console.log(posts);
