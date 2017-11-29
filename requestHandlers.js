@@ -1,45 +1,6 @@
     var querystring = require("querystring");
     //var Sequelize = require('sequelize');
     const db = require('./db')
-    
-
-    function start(response, postData) {  
-        
-        var content = "aaa";/*
-        var sequelize = new Sequelize('postgres', 'postgres', 'strelok', {
-          host: 'localhost',
-          dialect: 'postgres',
-        
-          pool: {
-            max: 5,
-            min: 0,
-            acquire: 30000,
-            idle: 10000
-          },
-          
-        });
-        */
-        response.writeHead(200, {"Content-Type": "text/html"});
-        db.sequelize
-        .authenticate()
-        .then(() => {
-        console.log('Connection has been established successfully.');
-        content = "Connection has been established successfully.";
-        response.write(content);
-        response.end();
-        })
-        .catch(err => {
-        console.error('Unable to connect to the database:', err);
-        content = "Unable to connect to the database";
-        response.write(content);
-        response.end();
-
-        });
-
-        // Or you can simply use a connection uri
-        //var sequelize = new Sequelize('postgres://user:pass@localhost:5432/postgres');
-
-    }
   
 function post(response, postData){
   //var sequelize = new Sequelize('postgres://postgres:strelok@localhost:5432/postgres');
@@ -90,7 +51,7 @@ function get(response, postData){
 
   var datas = querystring.parse(postData);
 
-  if(postData=="all"){
+  if(postData=="all" || postData==""){
     table_post.findAll().then(posts => {
       response.writeHead(200, {"Content-Type": "text/plain"});
       //console.log(posts);
@@ -343,20 +304,8 @@ function upd(response, postData){
     })
   }
 }
-
-  function upload(response, postData) {
-    //console.log("Request handler 'upload' was called.");
-    response.writeHead(200, {"Content-Type": "text/plain"});
-
-
-    response.write("You've sent the text: "+querystring.parse(postData).text);
-    response.end();
-  }
-
   
-  exports.start = start;
   exports.post = post;
   exports.get = get;
   exports.del = del;
   exports.upd = upd;
-  exports.upload = upload;

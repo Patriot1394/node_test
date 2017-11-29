@@ -4,12 +4,10 @@ var requestHandlers = require("./requestHandlers");
 
 
 var handle = {}
-handle["/"] = requestHandlers.start;
-handle["/start"] = requestHandlers.start;
+handle["/"] = requestHandlers.get;
 handle["/post"] = requestHandlers.post;
 handle["/get"] = requestHandlers.get;
 handle["/del"] = requestHandlers.del;
 handle["/upd"] = requestHandlers.upd;
-handle["/upload"] = requestHandlers.upload;
 
 server.start(router.route, handle);
